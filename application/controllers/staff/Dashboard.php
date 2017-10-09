@@ -31,6 +31,7 @@ class Dashboard extends CI_Controller
 			$this->load->view('staff/main-sidebar');
 			$this->load->view('staff/dashboard', $data);
 			$this->load->view('staff/main-footer');
+			$this->load->view('config/staff-script');
 			$this->load->view('config/footer');
 		}
 		else

@@ -15,39 +15,42 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
-      <li class="active treeview">
-        <a href="#">
+      <li class="active treeview" id="btnDashboard">
+        <a href="#" id="toDashboard">
         <i class="fa fa-dashboard"></i>
         <span>Dashboard</span></a>
       </li>
-
-      <li class="treeview">
-        <a href="#">
-        <i class="fa fa-dashboard"></i>
+      <li class="treeview" id="btnPengajar">
+        <a href="#" id="toPengajar">
+        <i class="glyphicon glyphicon-briefcase"></i>
         <span>Pengajar</span></a>
       </li>
-
-      <li class="treeview">
-        <a href="#">
-        <i class="fa fa-dashboard"></i>
+      <li class="treeview" id="btnMatakuliah">
+        <a href="#" id="toMatakuliah">
+        <i class="fa fa-sticky-note-o"></i>
+        <span>Matakuliah</span></a>
+      </li>
+      <li class="treeview" id="btnLaboratorium">
+        <a href="#" id="toLaboratorium">
+        <i class="fa fa-building"></i>
         <span>Laboratorium</span></a>
       </li>
 
-      <li class="treeview">
-        <a href="#">
-        <i class="fa fa-dashboard"></i>
+      <li class="treeview" id="btnJadwal">
+        <a href="#" id="toJadwal">
+        <i class="fa fa-book"></i>
         <span>Jadwal</span></a>
       </li>
 
-      <li class="treeview">
-        <a href="#">
-        <i class="fa fa-dashboard"></i>
-        <span>Konfirmasi Peminjaman</span></a>
+      <li class="treeview" id="btnPeminjaman">
+        <a href="#" id="toPeminjaman">
+        <i class="fa fa-calendar"></i>
+        <span>Peminjaman</span></a>
       </li>
 
-      <li class="treeview">
-        <a href="#">
-        <i class="fa fa-dashboard"></i>
+      <li class="treeview" id="btnDaftarPengguna">
+        <a href="#" id="toDaftarPengguna">
+        <i class="glyphicon glyphicon-user"></i>
         <span>Daftar Pengguna</span></a>
       </li>
   </section>
