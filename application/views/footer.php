@@ -1,3 +1,0 @@
-<html>
-Footer Here
-</html>

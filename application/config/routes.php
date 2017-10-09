@@ -54,5 +54,7 @@ $route['create'] = 'blog/create'; //$route['create']--->nama urlnya = blog/creat
 //admin
 $route['staff/dashboard'] = 'staff/dashboard';
 $route['login'] = 'login';
+$route['staff/logout'] = 'logout';
+$route['user/logout'] = 'logout';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

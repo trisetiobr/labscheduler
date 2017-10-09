@@ -1,39 +1,39 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
-                </div>
-                <div class="panel-body">
-                	<?php echo validation_errors(); ?>
-                	<?php echo form_open('login'); ?>
-                    <?php
-                        if($loginStatus == 'failed'){
-                            echo 'wrong id/password';
-                        }
-                        else if($loginStatus == 'none'){
-                            echo 'username doesn\'t exists';
-                        }
-                    ?>
-                        <fieldset>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="username" name="id" type="text" autofocus>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="password" name="password" type="password">
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                </label>
-                            </div>
-                            <!-- Change this to a button or input when using this as a form -->
-                            <input type="submit" class="btn btn-lg btn-success btn-block" name="submit" value="login">
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <b>Admin</b>LTE</a>
     </div>
+    
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <?php echo validation_errors(); ?>
+        <?php echo form_open('login'); ?>
+        <?php
+            if($loginStatus == 'failed'){
+                echo 'wrong id/password';
+            }
+            else if($loginStatus == 'none'){
+                echo 'username doesn\'t exists';
+            }
+            ?>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="username" name="id">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <input type="submit" class="btn btn-primary btn-block btn-flat" value="Login">
+                </div>
+                 <!-- /.col -->
+            </div>
+    </form>
+    <a href="#">I forgot my password</a><br>
+  </div>
+  <!-- /.login-box-body -->
 </div>
