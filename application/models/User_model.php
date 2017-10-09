@@ -38,4 +38,15 @@ class User_model extends CI_Model
 			return false;
 		}
 	}
+
+	public function get_user_roles_by_id($id)
+	{
+		$query = $this->db->select('roles.role')
+						  ->from('users')
+						  ->join('roles', 'users.role_id = roles.id')
+						  ->where('users.id', $id)
+						  ->get()
+						  ->row();
+		return $query->role;
+	}
 }

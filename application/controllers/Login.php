@@ -6,61 +6,66 @@ class Login extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('user_model');
-		$this->load->helper('url_helper');
-		$this->load->helper('form');
-		$this->load->helper('url');
-		$this->load->library('form_validation');
 	}
 
 	public function index()
 	{
-		$this->form_validation->set_rules('id','id','required');
-		$this->form_validation->set_rules('password','password','required');
-		$viewData = array('loginStatus'=>'');
-
-		if($this->form_validation->run() === FALSE)
+		// check is in session
+		if($this->session->userdata('id') == '')
 		{
-			$this->load->view('config/header');
-			$this->load->view('login', $viewData);
-			$this->load->view('config/footer');
-		}
-		else
-		{
-			//check id
-			$id = $this->input->post('id');
-			$password = $this->input->post('password');
-			$valid = $this->user_model->check_user_by_id($id);
+			$this->form_validation->set_rules('id','id','required');
+			$this->form_validation->set_rules('password','password','required');
+			$viewData = array('loginStatus'=>'');
 
-			if($valid)
+			if($this->form_validation->run() === FALSE)
 			{
-				$salt = $this->user_model->get_user_salt_by_id($id);
-				$password = hash('sha512', $salt.$password.$salt);
-				
-				$data = array('id'=>$id, 'password'=>$password);
+				$this->load->view('config/header');
+				$this->load->view('login', $viewData);
+				$this->load->view('config/footer');
+			}
+			else
+			{
+				//check id
+				$id = $this->input->post('id');
+				$password = $this->input->post('password');
+				$valid = $this->user_model->check_user_by_id($id);
 
-				$valid = $this->user_model->check_user_by_id_password($data);
 				if($valid)
 				{
-					// correct login
-					$this->load->view('config/header');
-					$this->load->view('home');
-					$this->load->view('config/footer');
+					$salt = $this->user_model->get_user_salt_by_id($id);
+					$password = hash('sha512', $salt.$password.$salt);
+					$data = array('id'=>$id, 'password'=>$password);
+
+					$valid = $this->user_model->check_user_by_id_password($data);
+
+					if($valid)
+					{
+						// correct login
+						$role = $this->user_model->get_user_roles_by_id($id);
+						$this->session->set_userdata('id', $id);
+						$this->session->set_userdata('role', $role);
+						redirect('staff/dashboard');
+					}
+					else
+					{
+						$viewData['loginStatus'] = 'failed';
+						$this->load->view('config/header');
+						$this->load->view('login', $viewData);
+						$this->load->view('config/footer');
+					}
 				}
 				else
 				{
-					$viewData['loginStatus'] = 'failed';
+					$viewData['loginStatus'] = 'none';
 					$this->load->view('config/header');
 					$this->load->view('login', $viewData);
 					$this->load->view('config/footer');
 				}
 			}
-			else
-			{
-				$viewData['loginStatus'] = 'none';
-				$this->load->view('config/header');
-				$this->load->view('login', $viewData);
-				$this->load->view('config/footer');
-			}
+		}
+		else
+		{
+			redirect('staff/dashboard');
 		}
 	}
 }

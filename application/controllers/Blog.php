@@ -6,10 +6,6 @@ class Blog extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('blog_model');
-		$this->load->helper('url_helper');
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$this->load->helper('url');
 	}
 
 	public function index()
@@ -19,13 +15,13 @@ class Blog extends CI_Controller
 			'Call Mom',
 			'Run Errands'
 		);*/
-		$data['title'] = 'My Real Title';
-		$data['heading'] = 'My Real Heading';
-		$data['todo'] = $this->blog_model->get_todo_all();
-
-		$this->load->view('header');
-		$this->load->view('blogview', $data);
-		$this->load->view('footer');
+		//$data['title'] = 'My Real Title';
+		//$data['heading'] = 'My Real Heading';
+		//$data['todo'] = $this->blog_model->get_todo_all();
+		echo 'a';
+		//$this->load->view('header');
+		//$this->load->view('blogview', $data);
+		//$this->load->view('footer');
 		//$string = $this->load->view('myfile', '', TRUE);
 	}
 
