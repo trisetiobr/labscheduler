@@ -53,6 +53,18 @@ $route['default_controller'] = 'welcome';
 $route['create'] = 'blog/create'; //$route['create']--->nama urlnya = blog/create -->nama controller
 //admin
 $route['staff/dashboard'] = 'staff/dashboard';
+//pengajar
+$route['staff/pengajar'] = 'staff/pengajar';
+//matakuliah
+$route['staff/matakuliah'] = 'staff/matakuliah';
+//laboratorium
+$route['staff/laboratorium'] = 'staff/laboratorium';
+//jadwal
+$route['staff/jadwal'] = 'staff/jadwal';
+//peminjaman
+$route['staff/peminjaman'] = 'staff/peminjaman';
+//daftar pengguna
+$route['staff/daftar-pengguna'] = 'staff/daftar_pengguna';
 $route['login'] = 'login';
 $route['staff/logout'] = 'logout';
 $route['user/logout'] = 'logout';

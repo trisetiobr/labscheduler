@@ -15,41 +15,41 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
-      <li class="active treeview" id="btnDashboard">
-        <a href="#" id="toDashboard">
+      <li class="treeview" sidebar="button" id="btn-dashboard">
+        <a class="click-menu" href="<?php echo base_url('staff/dashboard');?>">
         <i class="fa fa-dashboard"></i>
         <span>Dashboard</span></a>
       </li>
-      <li class="treeview" id="btnPengajar">
-        <a href="#" id="toPengajar">
+      <li class="treeview" id="btn-pengajar">
+        <a class="click-menu" href="<?php echo base_url('staff/pengajar');?>">
         <i class="glyphicon glyphicon-briefcase"></i>
         <span>Pengajar</span></a>
       </li>
-      <li class="treeview" id="btnMatakuliah">
-        <a href="#" id="toMatakuliah">
+      <li class="treeview" id="btn-matakuliah">
+         <a class="click-menu" href="<?php echo base_url('staff/matakuliah');?>">
         <i class="fa fa-sticky-note-o"></i>
         <span>Matakuliah</span></a>
       </li>
-      <li class="treeview" id="btnLaboratorium">
-        <a href="#" id="toLaboratorium">
+      <li class="treeview" id="btn-laboratorium">
+         <a class="click-menu" href="<?php echo base_url('staff/laboratorium');?>">
         <i class="fa fa-building"></i>
         <span>Laboratorium</span></a>
       </li>
 
-      <li class="treeview" id="btnJadwal">
-        <a href="#" id="toJadwal">
+      <li class="treeview" id="btn-jadwal">
+         <a class="click-menu" href="<?php echo base_url('staff/jadwal');?>">
         <i class="fa fa-book"></i>
         <span>Jadwal</span></a>
       </li>
 
-      <li class="treeview" id="btnPeminjaman">
-        <a href="#" id="toPeminjaman">
+      <li class="treeview" id="btn-peminjaman">
+         <a class="click-menu" href="<?php echo base_url('staff/peminjaman');?>">
         <i class="fa fa-calendar"></i>
         <span>Peminjaman</span></a>
       </li>
 
-      <li class="treeview" id="btnDaftarPengguna">
-        <a href="#" id="toDaftarPengguna">
+      <li class="treeview" id="btn-daftar-pengguna">
+         <a class="click-menu" href="<?php echo base_url('staff/daftar-pengguna');?>">
         <i class="glyphicon glyphicon-user"></i>
         <span>Daftar Pengguna</span></a>
       </li>

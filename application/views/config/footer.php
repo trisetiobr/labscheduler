@@ -37,7 +37,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('assets/dist/js/demo.js')?>"></script>
 <!-- iCheck -->
-<script src="<?php echo base_url('assetsplugins/iCheck/icheck.min.js')?>"></script>
+<script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js')?>"></script>
 <script>
   $(function () {
     $('input').iCheck({
