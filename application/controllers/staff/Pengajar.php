@@ -27,6 +27,8 @@ class Pengajar extends CI_Controller
 				'alert'=>'',
 				'query'=>''	
 			);
+
+		$this->load->model('user_model');
 	}
 
 	public function index()
@@ -86,5 +88,20 @@ class Pengajar extends CI_Controller
 		}
 		//footer
 		$this->load_footer();
+	}
+
+	public function ajax_check_username()
+	{
+		$id = $this->input->post('username');
+		$result = $this->user_model->check_user_by_id($id);
+		if($id == ''){
+			echo '2';
+		}
+		else if ($result){
+			echo '1';
+		}
+		else{
+			echo '0';
+		}
 	}
 }
