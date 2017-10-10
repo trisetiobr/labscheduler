@@ -7,14 +7,9 @@
       <div class="pull-left image">
         <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
       </div>
-      <div class="pull-left info">
-        <p>Alexander Pierce</p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-      </div>
     </div>
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
-      <li class="header">MAIN NAVIGATION</li>
       <li class="treeview" sidebar="button" id="btn-dashboard">
         <a class="click-menu" href="<?php echo base_url('staff/dashboard');?>">
         <i class="fa fa-dashboard"></i>

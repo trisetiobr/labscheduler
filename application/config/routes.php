@@ -55,6 +55,10 @@ $route['create'] = 'blog/create'; //$route['create']--->nama urlnya = blog/creat
 $route['staff/dashboard'] = 'staff/dashboard';
 //pengajar
 $route['staff/pengajar'] = 'staff/pengajar';
+$route['staff/pengajar/detail/(:any)'] = 'staff/pengajar/detail';
+$route['staff/pengajar/ubah/(:any)'] = 'staff/pengajar/ubah';
+$route['staff/pengajar/tambah'] = 'staff/pengajar/tambah';
+
 //matakuliah
 $route['staff/matakuliah'] = 'staff/matakuliah';
 //laboratorium
