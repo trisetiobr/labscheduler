@@ -63,47 +63,53 @@
                 <tr>
                   <th>Username</th>
                   <th>Nama</th>
+                  <th>Email</th>
+                  <th>Phone</th>
                   <th>Role</th>
                   <th>Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet</td>
-                  <td> asdasdasdsadsad4</td>
-                  <td>
-                    <button type="button" class="btn btn-info btn-href" href="<?php echo base_url('staff/pengajar/detail/1');?>">
-                      <i class="glyphicon glyphicon-eye-open"></i>
-                      <span>&nbspLihat</span>
-                    </button>
-              <?php if($role == 'admin')
-                    {
-              ?>
-                    <button type="button" class="btn btn-warning btn-href" href="<?php echo base_url('staff/pengajar/ubah/1');?>">
-                      <i class="glyphicon glyphicon-pencil" ></i>
-                      <span>&nbspUbah</span>
-                    </button>
-                    <button type="button" class="btn btn-danger btn-href">
-                      <i class="glyphicon glyphicon-remove"></i>
-                      <span>&nbspHapus</span>
-                    </button>
-              <?php }
-                    else
-                    {
-              ?>
-                    <button type="button" class="btn disabled">
-                      <i class="glyphicon glyphicon-pencil"></i>
-                      <span>&nbspUbah</span>
-                    </button>
-                    <button type="button" class="btn disabled">
-                      <i class="glyphicon glyphicon-remove"></i>
-                      <span>&nbspHapus</span>
-                    </button>
-              <?php }
-              ?>
-                  </td>
-                </tr>
+                <tbody>                
+                <?php foreach($staffs as $staff) { ?> 
+                  <tr>
+                    <td><?php echo $staff['id'];?></td>
+                    <td><?php echo $staff['name'];?></td>
+                    <td><?php echo $staff['email'];?></td>
+                    <td><?php echo $staff['phone'];?></td>
+                    <td><?php echo $staff['role'];?></td>
+                    <td>
+                      <button type="button" class="btn btn-info btn-href" href="<?php echo base_url('staff/pengajar/detail/');echo $staff['id'];?>">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                        <span>&nbspLihat</span>
+                      </button>
+                <?php if($role == 'admin' && $staff['id'] != $id)
+                      {
+                ?>
+                      <button type="button" class="btn btn-warning btn-href" href="<?php echo base_url('staff/pengajar/ubah/');echo $staff['id'];?>">
+                        <i class="glyphicon glyphicon-pencil" ></i>
+                        <span>&nbspUbah</span>
+                      </button>
+                      <button type="button" class="btn btn-danger btn-href" href="<?php echo base_url('staff/pengajar/delete/');echo $staff['id'];?>">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        <span>&nbspHapus</span>
+                      </button>
+                <?php }
+                      else
+                      {
+                ?>
+                      <button type="button" class="btn disabled">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <span>&nbspUbah</span>
+                      </button>
+                      <button type="button" class="btn disabled">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        <span>&nbspHapus</span>
+                      </button>
+                <?php }
+                ?>
+                    </td>
+                  </tr>
+                <?php } ?>
                 </tbody>
               </table>
             </div>

@@ -2,9 +2,6 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>
-      <?php echo $title; ?> Detail
-    </h1>
     <ol class="breadcrumb">
       <li><i class="<?php echo $icon;?>"></i> Home</a></li>
       <li><?php echo $title; ?></li>
@@ -30,25 +27,37 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              <h3 class="box-title"><?php echo $title; ?> Example</h3>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="Username">Username</label>
-                  <input type="email" class="form-control" id="#todo" placeholder="Username" disabled>
+              <!-- /.box-header -->
+              <!-- form start -->
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="Username">*Username</label> (maksimum 25 karakter)
+                    <input id="username" name="username" type="text" class="form-control field-required" placeholder="Username" maxlength="25" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">*Nama</label> (maksimum 25 karakter)
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Nama" maxlength="25" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="nama">*Password</label>
+                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" maxlength="25" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="nama">*Email</label> (example@example.com)
+                    <input id="email" name="email" type="email" class="form-control" placeholder="email" maxlength="50" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Nomor handphone</label>
+                    <input id="phone" name="phone" type="text" class="form-control" placeholder="Nomor handphone" maxlength="15" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label>Roles</label>
+                    <input name="role_id" class="form-control" value="" disabled>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="nama">Nama</label>
-                  <input type="email" class="form-control" id="#todo" placeholder="Name" disabled>
-                </div>
-                <div class="form-group">
-                  <label for="role">Role</label>
-                  <input type="email" class="form-control" id="#todo" placeholder="Role" disabled>
-                </div>
-              </div>
-              <!-- /.box-body -->
+              <!-- /.box-footer -->
           </div>
           <!-- /.box -->
         </div>
