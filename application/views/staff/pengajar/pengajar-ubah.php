@@ -24,35 +24,66 @@
         </div>
       </div>
     </div>
-    <div class="row">
+      <div class="row">
       <!-- left column -->
         <div class="col-md-6">
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              <h3 class="box-title"><?php echo $title; ?> Example</h3>
             </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="Username">Username</label>
-                  <input type="email" class="form-control" id="#todo" placeholder="Username" disabled>
+              <!-- /.box-header -->
+              <!-- form start -->
+                <?php echo form_open('staff/pengajar/update/'.$query['id']); ?>
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="Username">*Username</label> (maksimum 25 karakter)
+                    <input id="username" name="username" type="text" class="form-control" placeholder="Username" maxlength="25" value="<?php echo $query['id']?>" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">*Nama</label> (maksimum 25 karakter)
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Nama" maxlength="25" value="<?php echo $query['name'];?>" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="nama">*Email</label> (example@example.com)
+                    <input id="email" name="email" type="email" class="form-control" placeholder="email" maxlength="50" value="<?php echo $query['email'];?>" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Nomor handphone</label>
+                    <input id="phone" name="phone" type="text" class="form-control" placeholder="Nomor handphone" maxlength="15" value="<?php echo $query['phone'];?>" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label>Roles</label>
+                    <select name="role_id" class="form-control">
+                      <?php foreach($options as $option)
+                      {
+                        if($users_role_id == $option['id'])
+                        {
+                        ?>
+                          <option value="<?php echo $option['id'];?>" selected="selected">
+                            <?php echo $option['role'];?>  
+                          </option>
+                        <?php
+                        }
+                        else
+                        { ?>
+                          <option value="<?php echo $option['id'];?>">
+                            <?php echo $option['role'];?>
+                          </option>
+                    <?php }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="box-footer">
+                    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="nama">Nama</label>
-                  <input type="email" class="form-control" id="#todo" placeholder="Name">
-                </div>
-                <div class="form-group">
-                  <label for="role">Role</label>
-                  <input type="email" class="form-control" id="#todo" placeholder="Role">
-                </div>
-              </div>
-              <!-- /.box-body -->
+              <!-- /.box-footer -->
           </div>
           <!-- /.box -->
         </div>
-    </div>
+      </div>
   </section>
   <!-- /.content -->
 </div>

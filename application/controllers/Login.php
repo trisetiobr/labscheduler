@@ -44,6 +44,8 @@ class Login extends CI_Controller
 						$role = $this->user_model->get_user_roles_by_id($id);
 						$this->session->set_userdata('id', $id);
 						$this->session->set_userdata('role', $role);
+						$this->session->set_userdata('alert','');
+						$this->session->set_userdata('alert_text','');
 						redirect('staff/dashboard');
 					}
 					else

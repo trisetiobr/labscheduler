@@ -16,6 +16,7 @@ class User_model extends CI_Model
 		$this->db->trans_rollback();
 	}
 
+
 	public function check_user_by_id($id)
 	{
 		$query = $this->db->get_where('users',array('id'=>$id));
@@ -32,6 +33,17 @@ class User_model extends CI_Model
 	public function insert_user($data)
 	{
 		$query = $this->db->insert('users', $data);
+	}
+
+	public function update_user_role($data)
+	{
+		$this->db->trans_start();
+		$this->db->where('id', $data['id'])
+				 ->set('role_id', $data['role_id'])
+				 ->update('users');
+		$this->db->trans_complete();
+		
+		return $this->db->trans_status();
 	}
 
 	public function delete_user_by_id($id)
@@ -69,5 +81,15 @@ class User_model extends CI_Model
 						  ->get()
 						  ->row();
 		return $query->role;
+	}
+
+	public function get_user_role_id_by_id($id)
+	{
+		$query = $this->db->select('role_id')
+						  ->from('users')
+						  ->join('staffs', 'staffs.id = users.id')
+						  ->get()
+						  ->row();
+		return $query->role_id;
 	}
 }

@@ -25,7 +25,9 @@ class Pengajar extends CI_Controller
 				'icon'=>'glyphicon glyphicon-briefcase',
 				'role'=>$this->session->userdata('role'),
 				'id'=>$this->session->userdata('id'),
-				'alert'=>''	
+				'alert'=>$this->session->userdata('alert'),
+				'alert_text'=>$this->session->userdata('alert_text'),
+				'query'=>''	
 			);
 
 		$this->load->model('user_model');
@@ -59,8 +61,18 @@ class Pengajar extends CI_Controller
 			'phone'=>$phone
 		);
 		//create
-		$this->user_model->insert_user($userData);
-		$this->staff_model->insert_staff($staffData);
+		$query = $this->user_model->insert_user($userData);
+		$query = $this->staff_model->insert_staff($staffData);
+		if($query)
+		{
+			$this->session->set_userdata('alert_text', 'Data '.$this->data['title'].' berhasil ditambahkan');
+			$this->session->set_userdata('alert', 'alert-success');
+		}
+		else
+		{
+			$this->session->set_userdata('alert_text', 'Terjadi error, data '.$this->data['title'].' gagal ditambahkan');
+			$this->session->set_userdata('alert', 'alert-danger');
+		}
 		redirect('staff/pengajar');
 	}
 
@@ -71,7 +83,26 @@ class Pengajar extends CI_Controller
 
 	public function update()
 	{
-
+		$urls = $this->uri->segment_array();
+		$id = $urls[sizeof($urls)];
+		$role_id = $this->input->post('role_id');
+		$update = array(
+				'id'=>$id,
+				'role_id'=>$role_id
+				);
+		$query = $this->user_model->update_user_role($update);
+		if($query === TRUE)
+		{
+			$this->session->set_userdata('alert_text', 'Data '.$this->data['title'].' berhasil diubah');
+			$this->session->set_userdata('alert', 'alert-success');
+			redirect('staff/pengajar');
+		}
+		else
+		{
+			$this->session->set_userdata('alert_text', 'Terjadi error, data '.$this->data['title'].' gagal di ubah');
+			$this->session->set_userdata('alert', 'alert-danger');
+			redirect('staff/pengajar');
+		}
 	}
 
 	public function delete()
@@ -85,16 +116,21 @@ class Pengajar extends CI_Controller
 			if($query === TRUE)
 			{
 				$query = $this->user_model->commit();//commit
+				$this->session->set_userdata('alert', 'alert-success');
+				$this->session->set_userdata('alert_text', 'Data '.$this->data['title'].' berhasil di delete');
 				redirect('staff/pengajar');//rollback if failed
 			}
 			else
 			{
+				$this->session->set_userdata('alert', 'alert-danger');
+				$this->session->set_userdata('alert_text', 'Terjadi error, data '.$this->data['title'].' gagal di delete');
 				$this->user_model->rollback();//rollback if failed
 				redirect('staff/pengajar');
 			}
 		}
 		else
 		{
+			$this->session->set_userdata('alert', 'alert-danger');
 			$this->staff_model->rollback();//rollback if failed
 			redirect('staff/pengajar');
 		}
@@ -104,6 +140,8 @@ class Pengajar extends CI_Controller
 	{
 		$data = $this->data;
 		$data['staffs'] = $this->read();
+		$this->session->set_userdata('alert', '');
+		$this->session->set_userdata('alert_text', '');
 		//header
 		$this->load_header();
 		//content
@@ -115,11 +153,10 @@ class Pengajar extends CI_Controller
 	public function detail()
 	{
 		$data = $this->data;
-
 		$urls = $this->uri->segment_array();//get urls
 		$id = $urls[sizeof($urls)];//<-get last segment of url
-
 		$data['query'] = $this->staff_model->get_staff_join_role_by_id($id);
+	
 		//header;
 		$this->load_header();
 		//content
@@ -132,6 +169,11 @@ class Pengajar extends CI_Controller
 	{
 
 		$data = $this->data;
+		$urls = $this->uri->segment_array();
+		$id = $urls[sizeof($urls)];
+		$data['query'] = $this->staff_model->get_staff_join_role_by_id($id);
+		$data['options'] = $this->role_model->get_role_all();
+		$data['users_role_id'] = $this->user_model->get_user_role_id_by_id($id);
 		//header
 		$this->load_header();
 		//content

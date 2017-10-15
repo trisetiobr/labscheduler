@@ -60,7 +60,7 @@ $route['staff/pengajar/ubah/(:any)'] = 'staff/pengajar/ubah';
 $route['staff/pengajar/tambah'] = 'staff/pengajar/tambah';
 $route['staff/pengajar/create'] = 'staff/pengajar/create';//Create
 //Read
-//Update
+$route['staff/pengajar/update/(:any)'] = 'staff/pengajar/update';//Update
 $route['staff/pengajar/delete'] = 'staff/pengajar/delete';//Delete
 
 $route['staff/pengajar/ajax_check_username'] = 'staff/pengajar/ajax_check_username';

@@ -34,27 +34,23 @@
                 <div class="box-body">
                   <div class="form-group">
                     <label for="Username">*Username</label> (maksimum 25 karakter)
-                    <input id="username" name="username" type="text" class="form-control field-required" placeholder="Username" maxlength="25" disabled>
+                    <input id="username" name="username" type="text" class="form-control" placeholder="Username" maxlength="25" value="<?php echo $query['id']?>" disabled>
                   </div>
                   <div class="form-group">
                     <label for="name">*Nama</label> (maksimum 25 karakter)
-                    <input id="name" name="name" type="text" class="form-control" placeholder="Nama" maxlength="25" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label for="nama">*Password</label>
-                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" maxlength="25" disabled>
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Nama" maxlength="25" value="<?php echo $query['name'];?>" disabled>
                   </div>
                   <div class="form-group">
                     <label for="nama">*Email</label> (example@example.com)
-                    <input id="email" name="email" type="email" class="form-control" placeholder="email" maxlength="50" disabled>
+                    <input id="email" name="email" type="email" class="form-control" placeholder="email" maxlength="50" value="<?php echo $query['email'];?>" disabled>
                   </div>
                   <div class="form-group">
                     <label for="phone">Nomor handphone</label>
-                    <input id="phone" name="phone" type="text" class="form-control" placeholder="Nomor handphone" maxlength="15" disabled>
+                    <input id="phone" name="phone" type="text" class="form-control" placeholder="Nomor handphone" maxlength="15" value="<?php echo $query['phone'];?>" disabled>
                   </div>
                   <div class="form-group">
                     <label>Roles</label>
-                    <input name="role_id" class="form-control" value="" disabled>
+                    <input name="role_id" class="form-control" value="<?php echo $query['role'];?>" disabled>
                   </div>
                 </div>
               <!-- /.box-footer -->

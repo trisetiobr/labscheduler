@@ -21,10 +21,13 @@ class Staff_model extends CI_Model
 		$query = $this->db->insert('staffs', $data);
 	}
 
+	
+
 	public function delete_staff_by_id($id)
 	{
 		$this->db->trans_begin();
-		$this->db->where('id', $id)->delete('staffs');
+		$this->db->where('id', $id)
+		         ->delete('staffs');
 		return $this->db->trans_status();
 	}
 
@@ -34,10 +37,10 @@ class Staff_model extends CI_Model
 									roles.role')
 						  ->from('staffs')
 						  ->join('users', 'users.id = staffs.id')
-						  ->join('roles', 'roles.id = staffs.id')
-						  ->where('staffs.id = '.$id)
+						  ->join('roles', 'roles.id = users.role_id')
+						  ->where('staffs.id', $id)
 						  ->get()
-						  ->row();
+						  ->row_array();
 		return $query;
 	}
 
