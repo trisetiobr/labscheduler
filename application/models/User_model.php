@@ -1,6 +1,12 @@
 <?php
 class User_model extends CI_Model
 {
+	public $table = 'users';
+	public $fields = array(
+		'fields' => array( 'id', 'name', 'email', 'password', 'salt', 'role', 'phone' ),
+		'editable' => array( 'name', 'email', 'password', 'salt', 'role', 'phone' )
+	);
+
 	public function __construct()
 	{
 		$this->load->database();
@@ -15,8 +21,31 @@ class User_model extends CI_Model
 	{
 		$this->db->trans_rollback();
 	}
+	public function create($data)
+	{
+		$query = $this->db->insert($this->table, $data);
+		return $query;
+	}
+	public function get_by_pk($pk)
+	{
+		$query = $this->db->get_where($this->table, array('id'=>$pk))->result_array();
+		if(count($query) > 0)
+		{
+			$query = $query[0];
+		}
+		return $query;
+	}
+	public function get_all()
+	{
+		$query = $this->db->select('*')->from($table)->get()->result_array();
+		return $query;
+	}
 
-
+	public function get_all_by_role($role)
+	{
+		$query = $this->db->get_where($this->table, array('role'=>$role))->result_array();
+		return $query;
+	}
 	public function check_user_by_id($id)
 	{
 		$query = $this->db->get_where('users',array('id'=>$id));
@@ -28,11 +57,6 @@ class User_model extends CI_Model
 		{
 			return false;
 		}
-	}
-
-	public function insert_user($data)
-	{
-		$query = $this->db->insert('users', $data);
 	}
 
 	public function update_user_role($data)

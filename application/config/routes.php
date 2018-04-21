@@ -55,13 +55,12 @@ $route['create'] = 'blog/create'; //$route['create']--->nama urlnya = blog/creat
 $route['staff/dashboard'] = 'staff/dashboard';
 //pengajar
 $route['staff/pengajar'] = 'staff/pengajar';
-$route['staff/pengajar/detail/(:any)'] = 'staff/pengajar/detail';
+$route['staff/pengajar/detail/(:any)'] = 'staff/pengajar/detail/$1';
+$route['staff/pengajar/update/(:any)'] = 'staff/pengajar/update/$1';
 $route['staff/pengajar/ubah/(:any)'] = 'staff/pengajar/ubah';
 $route['staff/pengajar/tambah'] = 'staff/pengajar/tambah';
 $route['staff/pengajar/create'] = 'staff/pengajar/create';//Create
-//Read
-$route['staff/pengajar/update/(:any)'] = 'staff/pengajar/update';//Update
-$route['staff/pengajar/delete'] = 'staff/pengajar/delete';//Delete
+$route['staff/pengajar/delete/(:any)'] = 'staff/pengajar/delete/$1';//Delete
 
 $route['staff/pengajar/ajax_check_username'] = 'staff/pengajar/ajax_check_username';
 //matakuliah
@@ -73,6 +72,11 @@ $route['staff/jadwal'] = 'staff/jadwal';
 //peminjaman
 $route['staff/peminjaman'] = 'staff/peminjaman';
 //daftar pengguna
+
+// TESTING
+$route['test/ajax/db'] = 'test/test_ajax_db';
+$route['test/form'] = 'test/test_form';
+
 $route['staff/daftar-pengguna'] = 'staff/daftar_pengguna';
 $route['login'] = 'login';
 $route['staff/logout'] = 'logout';

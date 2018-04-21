@@ -1,6 +1,12 @@
 <?php
 class Staff_model extends CI_Model
 {
+	public $table = 'staffs';
+	public $fields = array(
+		'fields' => array( 'username', 'name', 'password', 'role', 'email', 'phone'),
+		'editable' => array( 'role' )
+	);
+
 	public function __construct()
 	{
 		$this->load->database();
@@ -16,6 +22,12 @@ class Staff_model extends CI_Model
 		$this->db->trans_commit();
 	}
 
+	public function update($id, $data)
+	{
+		$query = $this->db->where('id', $id)
+										  ->update($table, $data);
+		return $query;
+	}
 	public function insert_staff($data)
 	{
 		$query = $this->db->insert('staffs', $data);
@@ -44,13 +56,12 @@ class Staff_model extends CI_Model
 		return $query;
 	}
 
-	public function get_staff_all()
+	public function get_all()
 	{
 		$query = $this->db->select('staffs.id, staffs.name, staffs.email, 
-									staffs.phone, roles.role ')
+									staffs.phone, users.role')
 						  ->from('staffs')
 						  ->join('users', 'users.id = staffs.id')
-						  ->join('roles', 'roles.id = users.role_id')
 						  ->get()
 						  ->result_array();
 		return $query;

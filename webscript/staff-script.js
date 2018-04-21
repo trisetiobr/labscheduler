@@ -67,19 +67,22 @@ $(document).ready(function(){
 	}
 	init();
 	
-	//side-bar click
+	// side-bar click
 	$(".active.treeview").attr('class','treeview');
 	$("#btn-"+targetUrl).attr('class','active treeview');
-	//side bar button
+
+	// side bar button
 	$('.click-menu').click(function(){
 		var redirect_url = $(this).attr('href');
 		window.location.href = redirect_url;
 	});
+
 	//href link
 	$('.btn-href').click(function(){
 		var redirect_url = $(this).attr('href');
 		window.location.href = redirect_url;
 	});
+
 	//required field in form
 	$('.field-required').on("blur", function(){
 		var text = $(this).val();
@@ -95,8 +98,9 @@ $(document).ready(function(){
 			$(helpBlock).text('');
 		}
 	});
+
 	//trim input text whitespace
-	$('input').on("blur", function(){
+	/*$('input').on("blur", function(){
 		var text = $(this).val();
 		var textList = text.split(" ");
 		var textOutput = "";
@@ -111,7 +115,8 @@ $(document).ready(function(){
 			}
 		}
 		$(this).val(textOutput);
-	});
+	});*/
+
 	//form number only input
 	$('.txt-number').on("keypress keyup blur", function(event){
 		if ((event.which < 48 || event.which > 57)
@@ -127,7 +132,7 @@ $(document).ready(function(){
 		}
 	});
 	//disabled submit button when required fill is empty	
-	$('input').on("blur", function(){
+	/*$('input').on("blur", function(){
 		for(var i=0; i<form_config[currentForm].length; i++){
 			if($(form_config[currentForm][i]).val() == ""){
 				$('#submit').attr('class', 'btn btn-primary disabled');
@@ -136,7 +141,7 @@ $(document).ready(function(){
 				$('#submit').attr('class', 'btn btn-primary');	
 			}
 		}
-	});
+	});*/
 
 	checkFieldAvailability = function(id, target, controller){
 		var parentDiv = $("#"+id).closest('div');
