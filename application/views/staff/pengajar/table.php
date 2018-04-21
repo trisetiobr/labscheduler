@@ -1,4 +1,4 @@
-<table id="table" class="table table-bordered table-hover">
+<table id="table_1" class="table table-bordered table-hover">
   <thead>
   <tr>
     <th>Username</th>
@@ -18,29 +18,20 @@
       <td><?= $staff['phone'];?></td>
       <td><?= $staff['role'];?></td>
       <td>
-        <button type="button" class="btn btn-info btn-href" href="<?= base_url('staff/pengajar/detail/') . $staff['id'];?>">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-edit" data-id="<?= $staff['id'];?>">
           <i class="glyphicon glyphicon-eye-open"></i>
           <span> Lihat</span>
         </button>
-        <?php if($role == 'admin' && $staff['id'] != $id): ?>
-            <button type="button" class="btn btn-warning btn-href" href="<?= base_url('staff/pengajar/update/') . $staff['id'];?>">
-              <i class="glyphicon glyphicon-pencil" ></i>
-              <span> Ubah</span>
-            </button>
-            <button type="button" class="btn btn-danger btn-href" href="<?= base_url('staff/pengajar/delete/') . $staff['id'];?>">
-              <i class="glyphicon glyphicon-remove"></i>
-              <span> Hapus</span>
-            </button>
-        <?php else: ?>
-            <button type="button" class="btn disabled">
-              <i class="glyphicon glyphicon-pencil"></i>
-              <span> Ubah</span>
-            </button>
-            <button type="button" class="btn disabled">
-              <i class="glyphicon glyphicon-remove"></i>
-              <span> Hapus</span>
-            </button>
-        <?php endif; ?>
+
+        <a class="btn btn-primary" href="<?= base_url('staff/pengajar/update/') . $staff['id'];?>">
+          <i class="glyphicon glyphicon-pencil" ></i>
+          <span> Ubah</span>
+        </a>
+        <a class="btn btn-danger _delete_" data-toggle="modal" data-target="#modal-delete" data-id="<?= $staff['id'];?>">
+          <i class="glyphicon glyphicon-remove"></i>
+          <span> Hapus</span>
+        </a>
+
       </td>
     </tr>
   <?php endforeach; ?>

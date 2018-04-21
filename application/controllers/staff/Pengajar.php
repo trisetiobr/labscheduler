@@ -12,81 +12,78 @@ class Pengajar extends CI_Controller
 		parent::__construct();
 		$this->main = 'staff/main/main';
 		$this->not_found = 'staff/main/main-not-found';
-		$this->page_url = 'staff/pengajar/';
+		$this->page_url = 'staff/pengajar';
+
+		// load classes
+		$this->load->model('user_model');
+		$this->load->model('role_model');
+		$this->load->model('staff_model');
+		
+		// load identity service
+		$this->load->library('services/identity_service');
+		
+		// load alert service
+		$this->load->library('services/alert_service');
+
+		// load user service
+		$this->load->library('services/user_service');
+
+		// load staff service
+		$this->load->library('services/staff_service');
+
+		// load alert service
+		$this->load->library('services/alert_service');
+
+		// load utility service
+		$this->load->library('services/util/option_service');
+
+		// validate role
+		$this->identity_service->validate_role('admin');
 
 		$this->data = array(
 			'title'=>'Pengajar',
 			'icon'=>'glyphicon glyphicon-briefcase',
-			'role'=>$this->session->userdata('role'),
-			'id'=>$this->session->userdata('id'),
-			'alert'=>$this->session->userdata('alert'),
-			'alert_text'=>$this->session->userdata('alert_text'),
 			'query'=>'',
+			'alert'=>$this->alert_service->get_type(),
+			'alert_text'=>$this->alert_service->get_text(),
 			'page_url'=>$this->page_url,
 		);
-
-		$this->load->model('user_model');
-		$this->load->model('role_model');
-		$this->load->model('staff_model');
-		$this->load->helper('randomchar_generator');
 	}
 
 	// Index
 	public function index()
 	{
-		$data = $this->data;
-		$data['staffs'] = $this->user_model->get_all_by_role('staff');
-		$data['content'] = 'staff/pengajar/pengajar-content';
-
-		// set session
-		$this->session->set_userdata('alert', '');
-		$this->session->set_userdata('alert_text', '');
+		$this->data['staffs'] = $this->staff_service->get_all();
+		$this->data['content'] = $this->page_url . '/pengajar-content';
 
 		// view
-		$this->load->view($this->main, $data);
+		$this->load->view($this->main, $this->data);
 	}
 
 	// Create
 	public function create()
 	{
-		//content
-		if($this->data['role'] == 'admin')
+		if(count($this->input->post('User')) > 0)
 		{
-			if($this->input->server('REQUEST_METHOD') == 'POST')
-			{
-				// form submitted
-				$post = $this->input->post();
-				$fields = $this->user_model->fields['fields'];
-				$data = get_input($post, $fields);
-				$data['salt'] = randomchar_generator(25);
+			$User = $this->input->post('User');
 
-				// encrypt password
-				$data['password'] = hash('sha512', $data['salt'] . $data['password'] . $data['salt']);
-				
-				// create rcord
-				$query = $this->user_model->create($data);
-				if($query)
-				{
-					$this->session->set_userdata('alert_text', 'Data '.$this->data['title'].' berhasil ditambahkan');
-					$this->session->set_userdata('alert', 'alert-success');
-				}
-				else
-				{
-					$this->session->set_userdata('alert_text', 'Terjadi error, data '.$this->data['title'].' gagal ditambahkan');
-					$this->session->set_userdata('alert', 'alert-danger');
-				}
+			$result = $this->user_service->create($User);
+			if($result === 1)
+			{
+				// todo alert
+				$this->alert_service->set('success', 'data pengajar berhasil ditambahkan');
 			}
 			else
 			{
-				// load create page
-				$this->data['roles'] = $this->role_model->get_role_all();
-				$this->data['content'] = $this->page_url . 'pengajar-tambah';
+				// todo
 			}
 			redirect('staff/pengajar');
 		}
 		else
 		{
-			$this->data['content'] = $this->not_found;
+			// load create page
+			$this->data['roles'] = $this->option_service->roles();
+			$this->data['content'] = $this->page_url . '/pengajar-tambah';
 		}
 		$this->load->view($this->main, $this->data);
 	}
@@ -111,30 +108,21 @@ class Pengajar extends CI_Controller
 	// Update
 	public function update($id)
 	{ 
-		$Model = $this->staff_model->get_staff_join_role_by_id($id);
+		$Model = $this->staff_service->get($id);
 		if(count($Model) > 0)
 		{
 			// check post
-			if($this->input->server('REQUEST_METHOD') == 'POST')
+			if(count($this->input->post('User')) > 0)
 			{
-				// assign value
-				$post = $this->input->post();
-				$fields = $this->staff_model->fields['editable'];
-				$data = get_input($post, $fields);
-
-				$result = $this->staff_model->update($id, $data);
-				print_r($result); die;
+				$Data = $this->input->post('User');
+				$result = $this->staff_service->update($id, $Data);
+				redirect('staff/pengajar');
 			}
 			else
 			{
-				$options = $this->role_model->get_role_all();
-				$users_role_id = $this->user_model->get_user_role_id_by_id($id);
-
-				// view
+				$this->data['options'] = $this->option_service->roles();
 				$this->data['Model'] = $Model;
-				$this->data['content'] = 'staff/pengajar/pengajar-ubah';
-				$this->data['options'] = $options;
-				$this->data['users_role_id'] = $users_role_id;
+				$this->data['content'] = '/staff/pengajar/pengajar-ubah';
 			}
 		}
 		else
@@ -144,67 +132,19 @@ class Pengajar extends CI_Controller
 		$this->load->view($this->main, $this->data);
 	}
 
-	public function update2()
-	{
-		$urls = $this->uri->segment_array();
-		$id = $urls[sizeof($urls)];
-		$role_id = $this->input->post('role_id');
-		$update = array(
-				'id'=>$id,
-				'role_id'=>$role_id
-				);
-		$query = $this->user_model->update_user_role($update);
-		if($query === TRUE)
-		{
-			$this->session->set_userdata('alert_text', 'Data '.$this->data['title'].' berhasil diubah');
-			$this->session->set_userdata('alert', 'alert-success');
-		}
-		else
-		{
-			$this->session->set_userdata('alert_text', 'Terjadi error, data '.$this->data['title'].' gagal di ubah');
-			$this->session->set_userdata('alert', 'alert-danger');
-		}
-		redirect('staff/pengajar');
-	}
-
 	// Delete
 	public function delete($id)
 	{
-		$Model = $this->user_model->get_by_pk($id);
-		if(count($Model) > 0)
+		$result = $this->staff_service->delete($id);
+		if($result === true)
 		{
-			// perform delete
-			$query = $this->user_model->delete($Model);
+			// to do alert
 		}
 		else
 		{
-
+			// to do alert
 		}
-
-		if($query === TRUE)
-		{
-			$query = $this->user_model->delete_user_by_id($id);//delete user
-			if($query === TRUE)
-			{
-				$query = $this->user_model->commit();//commit
-				$this->session->set_userdata('alert', 'alert-success');
-				$this->session->set_userdata('alert_text', 'Data '.$this->data['title'].' berhasil di delete');
-				redirect('staff/pengajar');//rollback if failed
-			}
-			else
-			{
-				$this->session->set_userdata('alert', 'alert-danger');
-				$this->session->set_userdata('alert_text', 'Terjadi error, data '.$this->data['title'].' gagal di delete');
-				$this->user_model->rollback();//rollback if failed
-				redirect('staff/pengajar');
-			}
-		}
-		else
-		{
-			$this->session->set_userdata('alert', 'alert-danger');
-			$this->staff_model->rollback();//rollback if failed
-			redirect('staff/pengajar');
-		}
+		redirect('staff/pengajar');
 	}
 
 	public function ajax_check_username()

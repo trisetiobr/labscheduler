@@ -6,11 +6,10 @@ class Login extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('user_model');
 		// load auth service
-		$this->load->library('auth');
+		$this->load->library('services/auth_service');
 		// load identity service
-		$this->load->library('identity');
+		$this->load->library('services/identity_service');
 	}
 
 	public function index()
@@ -21,12 +20,15 @@ class Login extends CI_Controller
 			$POST = $this->input->post('User');
 			$id = $POST['id'];
 			$password = $POST['password'];
-			$auth = $this->auth->validate($id, $password);
+			$auth = $this->auth_service->validate($id, $password);
 			
 			if($auth['status'] === true)
 			{
-				$this->identity->set($auth['model']);
-				redirect('/staff/dashboard');
+				$this->identity_service->set($auth['model']);
+				if($this->identity_service->get_role() === 'admin')
+				{
+					redirect('/staff/dashboard');
+				}
 			}
 		}
 

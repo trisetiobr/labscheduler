@@ -2,14 +2,19 @@
 	
 class Role_model extends CI_Model
 {
+	public $table = 'roles';
+	public $fields = array(
+		'fields' => array( 'id', 'name'),
+		'editable' => array( 'name' )
+	);
+
 	public function __construct()
 	{
 		$this->load->database();
 	}
 
-	public function get_role_all()
+	public function get_all()
 	{
-		$query = $this->db->get('roles')->result_array();
-		return $query;
+		return $this->db->select('*')->from($this->table)->get()->result_array();
 	}
 }

@@ -11,7 +11,7 @@ class User_model extends CI_Model
 	{
 		$this->load->database();
 	}
-
+/*
 	public function commit()
 	{
 		$this->db->trans_commit();
@@ -20,43 +20,47 @@ class User_model extends CI_Model
 	public function rollback()
 	{
 		$this->db->trans_rollback();
-	}
+	}*/
 	public function create($data)
 	{
-		$query = $this->db->insert($this->table, $data);
-		return $query;
+		return $this->db->insert($this->table, $data);
+	}
+
+	public function update($pk, $data)
+	{
+		return $this->db->where('id', $pk)
+								    ->update($this->table, $data);
 	}
 	public function get_by_pk($pk)
 	{
-		$query = $this->db->get_where($this->table, array('id'=>$pk))->result_array();
-		if(count($query) > 0)
-		{
-			$query = $query[0];
-		}
-		return $query;
+		return $this->db->get_where($this->table, array('id'=>$pk))
+									  ->row_array();
 	}
+
+	public function get_by_pk_and_role($pk, $role)
+	{
+		return $this->db->get_where($this->table, array('id'=>$pk, 'role'=>$role))
+									  ->result_array();
+	}
+
+	public function delete_by_pk($pk)
+	{
+		return $this->db->where('id', $pk)->delete($this->table);
+	}
+
 	public function get_all()
 	{
-		$query = $this->db->select('*')->from($table)->get()->result_array();
-		return $query;
+		return $this->db->select('*')->from($this->table)->get()->result_array();
 	}
 
 	public function get_all_by_role($role)
 	{
-		$query = $this->db->get_where($this->table, array('role'=>$role))->result_array();
-		return $query;
+		return $this->db->get_where($this->table, array('role'=>$role))->result_array();
 	}
+
 	public function check_user_by_id($id)
 	{
-		$query = $this->db->get_where('users',array('id'=>$id));
-		if($query->num_rows() > 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return $this->db->get_where($this->table, array('id'=>$id))->num_rows();
 	}
 
 	public function update_user_role($data)
@@ -70,11 +74,7 @@ class User_model extends CI_Model
 		return $this->db->trans_status();
 	}
 
-	public function delete_user_by_id($id)
-	{
-		$this->db->where('id', $id)->delete('users');
-		return $this->db->trans_status();
-	}
+
 
 	public function get_user_salt_by_id($id)
 	{

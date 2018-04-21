@@ -33,45 +33,32 @@
           </div>
             <!-- /.box-header -->
             <!-- form start -->
-              <?php echo form_open('staff/pengajar/update/'.$Model['id']); ?>
+              <?= form_open('staff/pengajar/update/'.$Model['id'], array('method'=>'POST')); ?>
               <div class="box-body">
                 <div class="form-group">
                   <label for="Username">*Username</label> (maksimum 25 karakter)
-                  <input id="username" name="username" type="text" class="form-control" placeholder="Username" maxlength="25" value="<?php echo $Model['id']?>" disabled>
+                  <input id="username" name="User[id]" type="text" class="form-control" placeholder="Username" maxlength="25" value="<?php echo $Model['id']?>" disabled>
                 </div>
                 <div class="form-group">
                   <label for="name">*Nama</label> (maksimum 25 karakter)
-                  <input id="name" name="name" type="text" class="form-control" placeholder="Nama" maxlength="25" value="<?php echo $Model['name'];?>" disabled>
+                  <input id="name" name="User[name]" type="text" class="form-control" placeholder="Nama" maxlength="25" value="<?= $Model['name'];?>" disabled>
                 </div>
                 <div class="form-group">
                   <label for="nama">*Email</label> (example@example.com)
-                  <input id="email" name="email" type="email" class="form-control" placeholder="email" maxlength="50" value="<?php echo $Model['email'];?>" disabled>
+                  <input id="email" name="User[email]" type="email" class="form-control" placeholder="email" maxlength="50" value="<?= $Model['email'];?>" disabled>
                 </div>
                 <div class="form-group">
                   <label for="phone">Nomor handphone</label>
-                  <input id="phone" name="phone" type="text" class="form-control" placeholder="Nomor handphone" maxlength="15" value="<?php echo $Model['phone'];?>" disabled>
+                  <input id="phone" name="User[phone]" type="text" class="form-control" placeholder="Nomor handphone" maxlength="15" value="<?= $Model['phone'];?>" disabled>
                 </div>
                 <div class="form-group">
                   <label>Roles</label>
-                  <select name="role_id" class="form-control">
-                    <?php foreach($options as $option)
-                    {
-                      if($users_role_id == $option['id'])
-                      {
-                      ?>
-                        <option value="<?php echo $option['id'];?>" selected="selected">
-                          <?php echo $option['role'];?>  
+                  <select name="User[role]" class="form-control">
+                    <?php foreach($options as $key=>$val): ?>
+                        <option value="<?= $key;?>" selected="selected">
+                          <?= $val;?>  
                         </option>
-                      <?php
-                      }
-                      else
-                      { ?>
-                        <option value="<?php echo $option['id'];?>">
-                          <?php echo $option['role'];?>
-                        </option>
-                  <?php }
-                    }
-                    ?>
+                    <?php endforeach; ?>
                   </select>
                 </div>
                 <div class="box-footer">
@@ -79,6 +66,7 @@
                 </div>
               </div>
             <!-- /.box-footer -->
+            <?= form_close(); ?>
         </div>
         <!-- /.box -->
       </div>

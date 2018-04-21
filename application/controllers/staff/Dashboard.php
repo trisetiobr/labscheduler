@@ -3,23 +3,26 @@
 class Dashboard extends CI_Controller
 {
 	private $data;
-	private function load_header()
-	{
-
-		$this->load->view('config/header');
-		$this->load->view('staff/main-header');
-		$this->load->view('staff/main-sidebar');
-	}
-
-	private function load_footer()
-	{
-		$this->load->view('staff/main-footer');
-		$this->load->view('config/footer');
-	}
+	private $main;
+	private $not_found;
+	private $page_url;
 
 	public function __construct()
 	{
 		parent::__construct();
+		$this->main = 'staff/main/main';
+		$this->not_found = 'staff/main/main-not-found';
+		$this->page_url = 'staff/dashboard';
+
+		// load auth service
+		$this->load->library('services/auth_service');
+
+		// load identity service
+		$this->load->library('services/identity_service');
+
+		// validate role
+		$this->identity_service->validate_role('admin');
+		
 		$this->data = array(
 				'total_pengajar'=>0,
 				'total_matakuliah'=>0,
@@ -32,20 +35,7 @@ class Dashboard extends CI_Controller
 
 	public function index()
 	{
-		//check if session exists
-		if($this->session->userdata('id') != '')
-		{
-			$data = $this->data;
-			//header
-			$this->load_header();
-			//content
-			$this->load->view('staff/dashboard', $data);
-			//footer
-			$this->load_footer();
-		}
-		else
-		{
-			redirect('login');
-		}
+		$this->data['content'] = $this->page_url;
+		$this->load->view($this->main, $this->data);
 	}
 }

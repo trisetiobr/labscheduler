@@ -77,12 +77,6 @@ $(document).ready(function(){
 		window.location.href = redirect_url;
 	});
 
-	//href link
-	$('.btn-href').click(function(){
-		var redirect_url = $(this).attr('href');
-		window.location.href = redirect_url;
-	});
-
 	//required field in form
 	$('.field-required').on("blur", function(){
 		var text = $(this).val();

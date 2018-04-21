@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Identity {
+class Identity_service {
 	private $ci;
 	public function __construct()
 	{
@@ -30,6 +30,18 @@ class Identity {
 
 	public function get_role()
 	{
+		return $this->ci->session->userdata('role');
+	}
 
+	public function validate_role($type)
+	{
+		if($this->ci->session->userdata('role') === $type)
+		{
+			return true;
+		}
+		else
+		{
+			redirect('login');
+		}
 	}
 }

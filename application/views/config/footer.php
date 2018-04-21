@@ -39,6 +39,9 @@
 <!-- iCheck -->
 <script src="<?= base_url('assets/plugins/iCheck/icheck.min.js')?>"></script>
 
+<!-- DataTables -->
+<script src="<?= base_url('assets/bower_components/datatables.net/js/jquery.dataTables.min.js');?>"></script>
+<script src="<?= base_url('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js');?>"></script>
 
 <!-- jquery.min.js -->
 <!-- script src="<?php //echo base_url('webscript/3.2.1.jquery.min.js');?>"></script -->
@@ -51,6 +54,9 @@
 
 <!-- jquery utility script factorize @tsbr -->
 <script src="<?= base_url('webscript/utility-script.js');?>"></script>
+
+<!-- jquery modal script factorize @tsbr -->
+<script src="<?= base_url('webscript/modal-script.js');?>"></script>
 
 <!-- staf-script.js -->
 <script src="<?= base_url('webscript/staff-script.js');?>"></script>
