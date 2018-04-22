@@ -1,8 +1,9 @@
 $(document).ready(function(){
 	
 	// form validation
-	$(document).on('click', '#submit', function(){
-			var target_id = 'subject-form';
+	$(document).on('click', '.form-validation', function(){
+			var form = $(this).parents('form:first');
+			var target_id = form.attr('id');
 			Form.validation( '#'+target_id, { 'format': true });
 	});
 

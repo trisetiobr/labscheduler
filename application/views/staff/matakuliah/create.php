@@ -47,7 +47,7 @@
                   <i class="glyphicon glyphicon-triangle-left"></i>
                   <span> Back</span></a>
                 </a>
-                <button id="submit" type="submit" class="btn btn-success">Submit</button>
+                <button id="submit" type="submit" class="btn btn-success form-validation">Submit</button>
               </div>
               <!-- /.box-footer -->
             <?= form_close(); ?>
