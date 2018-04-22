@@ -52,6 +52,10 @@
                   <input id="phone" name="User[phone]" type="text" class="form-control" placeholder="Nomor handphone" maxlength="15" value="<?= $Model['phone'];?>" disabled>
                 </div>
                 <div class="form-group">
+                  <label for="phone">Coba</label>
+                  <input id="phone" name="User[coba]" type="text" class="form-control" placeholder="Nomor handphone" maxlength="15" >
+                </div>
+                <div class="form-group">
                   <label>Roles</label>
                   <select name="User[role]" class="form-control">
                     <?php foreach($options as $key=>$val): ?>

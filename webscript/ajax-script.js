@@ -5,7 +5,7 @@ var Ajax = {
 			"call": "",
 			"create": "",
 			"create_by_conds": "",
-			"get_by_id": "",
+			"get_by_pk": Util.path.join(Util.baseUrl(), 'ajax/ajax_db/get_by_pk'),
 			"get_by_conds": "",
 			"update_by_id": "",
 			"update_by_conds": "",
@@ -75,18 +75,17 @@ var Ajax = {
 				}
 			});
 		},
-		getById: function(model, id, url, callback){
+		getByPk: function(model, pk, url, callback){
 	
 			if( url == '' || url == null){
-				url = Ajax.config['default_url']['get_by_id'];
+				url = Ajax.config['default_url']['get_by_pk'];
 			}
-
 			$.ajax({
 				async: true,
 				cache: false,
 				type: 'post',
 				url: url,
-				data: { 'model': model, 'id': id },
+				data: { 'model': model, 'pk': pk },
 				success: function(result){
 					var data = JSON.parse(result);
 					callback(data);

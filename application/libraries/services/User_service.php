@@ -14,17 +14,22 @@ class User_service {
 	{
 		// load auth service
 		$this->ci->load->library('services/auth_service');
-		
-		// load model service
+
 		$result = false;
-		
-		// check if record exists
-		$coba = $this->ci->user_model->get_by_pk($User['id']);
-		if(count($coba) === 0)
+		// data validation
+		$validation = data_fmt_validate('user_model', $User, 'create');
+
+		if($validation['result'] === 1)
 		{
-			$User['salt'] = $this->generate_salt();
-			$User['password'] = $this->ci->auth_service->encrypt($User['password'], $User['salt']);
-			$result = $this->ci->user_model->create($User);
+			$User = $validation['data'];
+			// check if record exists
+			$coba = $this->ci->user_model->get_by_pk($User['id']);
+			if(count($coba) === 0)
+			{
+				$User['salt'] = $this->generate_salt();
+				$User['password'] = $this->ci->auth_service->encrypt($User['password'], $User['salt']);
+				$result = $this->ci->user_model->create($User);
+			}
 		}
 		return $result;
 	}

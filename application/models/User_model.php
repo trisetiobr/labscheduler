@@ -2,25 +2,19 @@
 class User_model extends CI_Model
 {
 	public $table = 'users';
-	public $fields = array(
-		'fields' => array( 'id', 'name', 'email', 'password', 'salt', 'role', 'phone' ),
-		'editable' => array( 'name', 'email', 'password', 'salt', 'role', 'phone' )
-	);
+	public $fields = [
+		'pk' => 'id',
+		'fields' => [ 'id', 'name', 'email', 'password', 'salt', 'role', 'phone' ],
+		'create' => [ 'id', 'name', 'email', 'password', 'role', 'phone' ],
+		'update' => [ 'name', 'email', 'password', 'role', 'phone'],
+		'rules' => [],
+	];
 
 	public function __construct()
 	{
 		$this->load->database();
 	}
-/*
-	public function commit()
-	{
-		$this->db->trans_commit();
-	}
 
-	public function rollback()
-	{
-		$this->db->trans_rollback();
-	}*/
 	public function create($data)
 	{
 		return $this->db->insert($this->table, $data);

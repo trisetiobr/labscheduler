@@ -46,14 +46,22 @@
 <!-- jquery.min.js -->
 <!-- script src="<?php //echo base_url('webscript/3.2.1.jquery.min.js');?>"></script -->
 
+<!-- jquery form validation
+			documentation: https://jqueryvalidation.org/documentation/
+ -->
+ <script src="<?= base_url('assets/plugins/jquery-validate/jquery.validate.1.17.0.min.js');?>"></script>
+
+<!-- jquery utility script factorize @tsbr -->
+<script src="<?= base_url('webscript/utility-script.js');?>"></script>
+
 <!-- jquery form factorize @tsbr -->
 <script src="<?= base_url('webscript/form-jquery.js');?>"></script>
 
 <!-- jquery ajax script factorize @tsbr -->
 <script src="<?= base_url('webscript/ajax-script.js');?>"></script>
 
-<!-- jquery utility script factorize @tsbr -->
-<script src="<?= base_url('webscript/utility-script.js');?>"></script>
+<!-- jquery template script factorize @tsbr -->
+<script src="<?= base_url('webscript/template-script.js');?>"></script>
 
 <!-- jquery modal script factorize @tsbr -->
 <script src="<?= base_url('webscript/modal-script.js');?>"></script>
@@ -70,6 +78,3 @@
     });
   });
 </script>
-
-</body>
-</html>

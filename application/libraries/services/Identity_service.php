@@ -18,6 +18,11 @@ class Identity_service {
 		}
 	}
 
+	public function get()
+	{
+
+	}
+	
 	public function destroy()
 	{
 

@@ -21,7 +21,7 @@
         <span>Pengajar</span></a>
       </li>
       <li class="treeview" id="btn-matakuliah">
-         <a class="click-menu" href="<?php echo base_url('staff/matakuliah');?>">
+        <a class="click-menu" href="<?php echo base_url('staff/subject');?>">
         <i class="fa fa-sticky-note-o"></i>
         <span>Matakuliah</span></a>
       </li>
@@ -38,7 +38,7 @@
       </li>
 
       <li class="treeview" id="btn-peminjaman">
-         <a class="click-menu" href="<?php echo base_url('staff/peminjaman');?>">
+        <a class="click-menu" href="<?php echo base_url('staff/peminjaman');?>">
         <i class="fa fa-calendar"></i>
         <span>Peminjaman</span></a>
       </li>

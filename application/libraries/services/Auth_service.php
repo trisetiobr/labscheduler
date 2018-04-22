@@ -16,6 +16,7 @@ class Auth_service {
   	if(count($User) > 0)
   	{
   		$currentpwd = $this->encrypt($password, $User['salt']);
+
   		if(strtolower($id) === strtolower($User['id']) && strtolower($currentpwd) === strtolower($User['password']))
   		{
   			$outp['status'] = true;

@@ -13,11 +13,6 @@ class Pengajar extends CI_Controller
 		$this->main = 'staff/main/main';
 		$this->not_found = 'staff/main/main-not-found';
 		$this->page_url = 'staff/pengajar';
-
-		// load classes
-		$this->load->model('user_model');
-		$this->load->model('role_model');
-		$this->load->model('staff_model');
 		
 		// load identity service
 		$this->load->library('services/identity_service');

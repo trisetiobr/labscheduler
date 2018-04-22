@@ -63,8 +63,11 @@ $route['staff/pengajar/create'] = 'staff/pengajar/create';//Create
 $route['staff/pengajar/delete/(:any)'] = 'staff/pengajar/delete/$1';//Delete
 
 $route['staff/pengajar/ajax_check_username'] = 'staff/pengajar/ajax_check_username';
+
 //matakuliah
-$route['staff/matakuliah'] = 'staff/matakuliah';
+$route['staff/subject'] = 'staff/subject';
+$route['staff/subject/create'] = 'staff/subject/create';
+
 //laboratorium
 $route['staff/laboratorium'] = 'staff/laboratorium';
 //jadwal

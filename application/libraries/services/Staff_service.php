@@ -36,23 +36,28 @@ class Staff_service {
 	public function update($pk, $data)
 	{
 		$User = $this->ci->user_model->get_by_pk_and_role($pk, 'staff');
+		$validation = data_fmt_validate('user_model', $data, 'update');
 		$outp = false;
-		if(count($User) == 1)
+		if($validation['result'] === true)
 		{
-			if(array_key_exists('id', $data))
+			$data = $validation['data'];
+			if(count($User) == 1)
 			{
-				unset($data['id']);
-			}
-			$this->ci->db->trans_begin();
-			$query = $this->ci->user_model->update($pk, $data);
-			if($query === true)
-			{
-				$outp = true;
-				$this->ci->db->trans_commit();
-			}
-			else
-			{
-				$this->ci->db->rollback();
+				if(array_key_exists('id', $data))
+				{
+					unset($data['id']);
+				}
+				$this->ci->db->trans_begin();
+				$query = $this->ci->user_model->update($pk, $data);
+				if($query === true)
+				{
+					$outp = true;
+					$this->ci->db->trans_commit();
+				}
+				else
+				{
+					$this->ci->db->rollback();
+				}
 			}
 		}
 		return $outp;
