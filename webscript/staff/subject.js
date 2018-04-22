@@ -1,23 +1,9 @@
 $(document).ready(function(){
 	
 	// form validation
-	$( "#subject-form" ).validate({
-	  rules: {
-	    'Subject[code]': {
-	      required: true,
-	    },
-	    'Subject[name]': {
-	    	required: true,
-	    },
-	  },
-	  highlight: function (element, errorClass) {
-        $(element).closest('.form-group').addClass('has-error');
-    },
-	  messages: {
-	  	'Subject[code]': {
-	  		required: 'We need the subject code as identifier',
-	  	}
-	  },
+	$(document).on('click', '#submit', function(){
+			var target_id = 'subject-form';
+			Form.validation( '#'+target_id, { 'format': true });
 	});
 
 	// click delete button in datatable

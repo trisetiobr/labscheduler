@@ -25,19 +25,19 @@
                 
                 <div class="form-group">
                   <label class="control-label">*Kode</label> (maksimum 15 karakter)
-                  <input id="test" name="Subject[code]" type="text" class="form-control" placeholder="Kode pelajaran" maxlength="25">
+                  <input id="Subject_code" name="Subject[code]" type="text" class="form-control input-required" placeholder="Kode pelajaran" maxlength="25">
                   <span class="help-block"></span>
                 </div>
                 
                 <div class="form-group">
                   <label class="control-label">Nama</label> (maksimum 50 karakter)
-                  <input name="Subject[name]" type="text" class="form-control" placeholder="Nama" maxlength="25">
+                  <input id="Subject_name" name="Subject[name]" type="text" class="form-control input-required" placeholder="Nama" maxlength="25">
                   <span class="help-block"></span>
                 </div>
 
                 <div class="form-group">
                   <label class="control-label">Deskripsi</label> (maksimum 150 karakter)
-                  <textarea name="Subject[description]" class="form-control" placeholder="Deskripsi" maxlength="25"></textarea>
+                  <textarea id="Subject_description" name="Subject[description]" class="form-control" placeholder="Deskripsi" maxlength="25"></textarea>
                   <span class="help-block"></span>
                 </div>
 

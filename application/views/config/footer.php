@@ -57,6 +57,9 @@
 <!-- jquery form factorize @tsbr -->
 <script src="<?= base_url('webscript/form-jquery.js');?>"></script>
 
+<!-- jquery form script factorize @tsbr -->
+<script src="<?= base_url('webscript/form-script.js');?>"></script>
+
 <!-- jquery ajax script factorize @tsbr -->
 <script src="<?= base_url('webscript/ajax-script.js');?>"></script>
 
